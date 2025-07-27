@@ -1,26 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ph_routine.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 01:06:30 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/27 09:31:57 by rnakatan         ###   ########.fr       */
+/*   Created: 2025/07/27 08:45:19 by rnakatan          #+#    #+#             */
+/*   Updated: 2025/07/27 08:46:29 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ph_status.h"
-
-int	main(char **argv, int argc)
+void	*ph_philo_routine(void *arg)
 {
-	int	ret;
-
-	// not yet imprement
-	// if (ph_argument_check(argv, argc) != PH_VAILD_ARG)
-	// 	ph_printerr();
-	// if (ph_dining(argv, argc) != PH_SUCCESS)
-	// 	ph_printerr();
-	// ph_dining()
-	return (0);
+	// wait all thread create
+	// philo eat routine
 }

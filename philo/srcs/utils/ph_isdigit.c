@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ph_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 01:06:30 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/27 09:31:57 by rnakatan         ###   ########.fr       */
+/*   Created: 2025/07/15 00:59:23 by rnakatan          #+#    #+#             */
+/*   Updated: 2025/07/15 01:00:42 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ph_status.h"
+#include <stdbool.h>
 
-int	main(char **argv, int argc)
+bool	ph_isdigit(char c)
 {
-	int	ret;
-
-	// not yet imprement
-	// if (ph_argument_check(argv, argc) != PH_VAILD_ARG)
-	// 	ph_printerr();
-	// if (ph_dining(argv, argc) != PH_SUCCESS)
-	// 	ph_printerr();
-	// ph_dining()
-	return (0);
+	return ('0' <= c && c <= '9');
 }

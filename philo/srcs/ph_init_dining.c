@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:49:38 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/13 23:52:30 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/15 00:54:20 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ t_dining	*ph_init_dining(t_dining_data *dining_data)
 	int			ret;
 
 	dining = malloc(sizeof(t_dining) * dining_data->philo_num);
-    if (!dining)
+	if (!dining)
 	{
-		// メモリ確保に失敗したらNULLを返す
 		return (NULL);
 	}
 	i = 0;
