@@ -6,62 +6,42 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 08:32:05 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/27 09:32:01 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/29 00:44:22 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_dining.h"
 #include <stdlib.h>
 #include "ph_status.h"
+#include "ph_utils.h"
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
 
-t_dining_data	*ph_get_dining_data(char **argv);
-
-int	ph_dining(char **argv)
+int	ph_dining(t_dining_data *data)
 {
-	//get dining_data
-	// const t_dining_data	dining_data = ph_get_dining_data(argv);
-	pthread_t *threads;
+	int			i;
+	t_dining	*dining;
+	int			ret;
 
-	ph_init_dining();
-	ph_create_thread();
-	i = 0;
-	threads = (pthread_t *)malloc(philo_num)
-	while(i < philo_num)
+	ret = ph_init_dining(&dining, data);
+	if (ret != PH_SUCCESS)
 	{
-		pthread_create(&threads);
-		i++;
+		fprintf(stderr, "Error initializing dining: %d\n", ret);
+		if (ret == PH_MEMORY_ERROR)
+			fprintf(stderr, "Memory allocation error\n");
+		if (dining)
+			ph_free_resources(dining);
+		return (ret);
 	}
-	i = 0;
-	while(i < philo_num)
-	{
-		pthread_join()
-		i++;
-	}
-	ph_close_dining();
+	for (i = 0; i < data->philo_num; i++)
+		pthread_create(&dining->threads[i], NULL, ph_philo_routine, &dining->philos[i]);
+	usleep(1000);
+	pthread_mutex_lock(dining->start_flag->mutex);
+	dining->start_flag->is_started = true;
+	pthread_mutex_unlock(dining->start_flag->mutex);
+	for (i = 0; i < data->philo_num; i++)
+		pthread_join(dining->threads[i], NULL);
+	ph_free_resources(dining);
 	return (PH_SUCCESS);
-}
-
-t_dining_data	*ph_get_dining_data(char **argv)
-{
-	t_dining_data	*dining_data;
-
-	dining_data = malloc(sizeof(t_dining_data));
-	if (!dining_data)
-		return (NULL);
-	dining_data->philo_num = ph_atoi(argv[1]);
-	dining_data->time_to_die = ph_atoi(argv[2]);
-	dining_data->time_to_eat = ph_atoi(argv[3]);
-	dining_data->time_to_sleep = ph_atoi(argv[4]);
-	return (dining_data);
-}
-
-int	ph_thread_create()
-{
-	threads = 
-	i = 0;
-	while(i < philo_num)
-	{
-		pthread_create(&threads);
-		i++;
-	}
 }
