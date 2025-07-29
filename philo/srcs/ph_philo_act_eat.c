@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:51:44 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 19:14:28 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/29 19:26:11 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ph_status.h"
 #include "ph_action.h"
 #include <stdio.h>
+#include <unistd.h>
 
 static int	ph_philo_eat_even(t_philo *philo);
 static int	ph_philo_eat_odd(t_philo *philo);
@@ -31,6 +32,7 @@ int	ph_philo_act_eat(t_philo *philo)
 			ret = ph_philo_eat_odd(philo);
 		if (ret == TAKEN)
 			break ;
+		usleep(1);
 	}
 	ph_print_action(philo, PHILO_EAT);
 	ph_usleep(philo->philo_info->data->time_to_eat);
@@ -53,6 +55,7 @@ static int	ph_philo_eat_even(t_philo *philo)
 	if (philo->philo_info->left_fork->is_used)
 	{
 		pthread_mutex_lock(philo->philo_info->right_fork->mutex);
+		philo->philo_info->right_fork->is_used = false;
 		pthread_mutex_unlock(philo->philo_info->right_fork->mutex);
 		pthread_mutex_unlock(philo->philo_info->left_fork->mutex);
 		return (NOT_TAKEN);
@@ -76,6 +79,7 @@ static int	ph_philo_eat_odd(t_philo *philo)
 	if (philo->philo_info->right_fork->is_used)
 	{
 		pthread_mutex_lock(philo->philo_info->left_fork->mutex);
+		philo->philo_info->left_fork->is_used = false;
 		pthread_mutex_unlock(philo->philo_info->left_fork->mutex);
 		pthread_mutex_unlock(philo->philo_info->right_fork->mutex);
 		return (NOT_TAKEN);
