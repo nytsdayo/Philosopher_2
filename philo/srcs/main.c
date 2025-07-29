@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	data->time_to_sleep = SLEEP_TIME;
 	if (ph_dining(data) != PH_SUCCESS)
 	{
-		fprintf(stderr, "malloc err=or\n");
+		fprintf(stderr, "malloc error\n");
 		return (1);
 	}
 	return (0);
