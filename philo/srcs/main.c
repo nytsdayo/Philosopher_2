@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 01:06:30 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 17:09:51 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:41:03 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "../inc/ph_utils.h"
 #include "../inc/ph_status.h"
 
-#define PHILO_NUM 5
+#define PHILO_NUM 200
 #define EAT_TIME 100
 #define SLEEP_TIME 100
 #define DEAD_TIME 200

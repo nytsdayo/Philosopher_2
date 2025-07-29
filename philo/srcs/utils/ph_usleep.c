@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:31:49 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 16:17:27 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:47:57 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	ph_usleep(long time_in_ms)
 		current_time = get_now_time();
 		if (current_time - start_time >= time_in_ms)
 			break ;
-		usleep(1);
+		usleep(1000);
 	}
 }
