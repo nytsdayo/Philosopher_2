@@ -68,7 +68,7 @@ static int	overflow(int mnsflag, long res, const char c)
 	return (1);
 }
 
-static int	jugde_flag(char nptr)
+static int	judge_flag(char nptr)
 {
 	if (nptr == '-')
 		return (-1);
