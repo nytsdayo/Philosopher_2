@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 08:32:05 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 00:44:22 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:32:12 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ int	ph_dining(t_dining_data *data)
 			ph_free_resources(dining);
 		return (ret);
 	}
+	
+	pthread_mutex_lock(dining->table_info->start_time->mutex);
 	for (i = 0; i < data->philo_num; i++)
-		pthread_create(&dining->threads[i], NULL, ph_philo_routine, &dining->philos[i]);
-	usleep(1000);
-	pthread_mutex_lock(dining->start_flag->mutex);
-	dining->start_flag->is_started = true;
-	pthread_mutex_unlock(dining->start_flag->mutex);
+	{
+		pthread_create(&dining->threads[i], NULL, &ph_philo_routine, &dining->philos[i]);
+	}
+	dining->table_info->start_time->time = ph_get_now_time_msec();
+	pthread_mutex_unlock(dining->table_info->start_time->mutex);
 	for (i = 0; i < data->philo_num; i++)
 		pthread_join(dining->threads[i], NULL);
 	ph_free_resources(dining);

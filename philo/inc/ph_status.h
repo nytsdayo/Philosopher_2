@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 03:01:43 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/27 15:34:42 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:50:29 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,15 @@ typedef enum e_arg_status
 	PH_INVAlID_ARGC,
 	PH_INVALID_NOT_NUM,
 	PH_INVALID_OUT_OF_RANGE,
-	PH_MEMORY_ERROR
+	PH_MEMORY_ERROR,
+	PH_MUTEX_ERROR,
 }	t_arg_status;
+
+typedef enum e_philo_status
+{
+	PHILO_ALIVE,
+	PHILO_DEAD
+}	t_philo_status;
 
 typedef enum e_dining_status
 {

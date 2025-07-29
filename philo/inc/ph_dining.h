@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 09:44:53 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 00:45:43 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:59:27 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,7 @@
 
 #include <pthread.h>
 #include <stdbool.h>
-
-typedef struct s_start_flag
-{
-	pthread_mutex_t	*mutex;
-	bool	is_started;
-}	t_start_flag;
-
-typedef struct s_fork
-{
-	pthread_mutex_t	*mutex;
-	bool			is_used;
-}	t_fork;
-
-typedef struct s_print
-{
-	pthread_mutex_t	*mutex;
-}	t_print;
+#include "ph_mutex.h"
 
 typedef struct s_dining_data
 {
@@ -50,37 +34,43 @@ typedef struct s_philo_data
 	int	count_eat;
 }	t_philo_data;
 
-typedef struct s_philo
+typedef struct s_philo_info
 {
 	int				id;
-	t_dining_data	*data;
 	t_fork			*left_fork;
 	t_fork			*right_fork;
 	long			last_eat_time;
 	t_start_flag	*start_flag;
-	t_print			*print_mutex; // for printing
-}	t_philo;
+	t_print			*print_mutex;
+	t_dining_data	*data;
+}	t_philo_info;
 
-typedef struct s_table
+typedef struct s_table_info
 {
-	long			start_time;
-}	t_table;
+	int				philo_num;
+	t_start_flag	*start_flag;
+	t_start_time	*start_time;
+}	t_table_info;
+
+typedef struct s_philo
+{
+	pthread_t		thread;
+	t_philo_info	*philo_info;
+	t_table_info	*table_info;
+}	t_philo;
 
 typedef struct t_dining
 {
 	pthread_t		*threads;
 	t_fork			**forks;
 	t_philo			*philos;
-	t_start_flag	*start_flag;
 	t_print			*print;
 	t_dining_data	*data;
+	t_table_info	*table_info;
 }	t_dining;
-
 
 int		ph_init_dining(t_dining **dining, t_dining_data *data);
 void	*ph_philo_routine(void *arg);
 int		ph_dining(t_dining_data *data);
-
-
 
 #endif

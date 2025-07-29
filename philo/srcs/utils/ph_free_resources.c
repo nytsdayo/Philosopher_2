@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 15:45:32 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 00:54:06 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:24:19 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,50 @@ void	ph_free_resources(t_dining *dining)
 
 	if (!dining)
 		return;
-	if (dining->threads)
+	if (dining->philos)
 	{
-		free(dining->threads);
+		for (i = 0; i < dining->data->philo_num; i++)
+		{
+			if (dining->philos[i].philo_info)
+			{
+				free(dining->philos[i].philo_info);
+			}
+		}
+		free(dining->philos);
 	}
+	if (dining->threads)
+		free(dining->threads);
 	if (dining->forks)
 	{
 		for (i = 0; i < dining->data->philo_num; i++)
 		{
-			if (dining->forks[i]->mutex)
+			if (dining->forks[i])
 			{
-				pthread_mutex_destroy(dining->forks[i]->mutex);
-				free(dining->forks[i]->mutex);
+				if (dining->forks[i]->mutex)
+				{
+					pthread_mutex_destroy(dining->forks[i]->mutex);
+					free(dining->forks[i]->mutex);
+				}
+				free(dining->forks[i]);
 			}
 		}
 		free(dining->forks);
 	}
-	if (dining->philos)
-		free(dining->philos);
-	if (dining->start_flag)
+	if (dining->table_info)
 	{
-		if (dining->start_flag->mutex)
+		if (dining->table_info->start_flag)
 		{
-			pthread_mutex_destroy(dining->start_flag->mutex);
-			free(dining->start_flag->mutex);
+			pthread_mutex_destroy(dining->table_info->start_flag->mutex);
+			free(dining->table_info->start_flag->mutex);
+			free(dining->table_info->start_flag);
 		}
-		free(dining->start_flag);
+		if (dining->table_info->start_time)
+		{
+			pthread_mutex_destroy(dining->table_info->start_time->mutex);
+			free(dining->table_info->start_time->mutex);
+			free(dining->table_info->start_time);
+		}
+		free(dining->table_info);
 	}
 	if (dining->print)
 	{

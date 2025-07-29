@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_get_now_time.c                                  :+:      :+:    :+:   */
+/*   ph_mutex.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 00:34:13 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 17:23:48 by rnakatan         ###   ########.fr       */
+/*   Created: 2025/07/29 12:28:39 by rnakatan          #+#    #+#             */
+/*   Updated: 2025/07/29 14:50:14 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/time.h>
-#include <stdlib.h>
+#ifndef PH_MUTEX_H
+# define PH_MUTEX_H
 
-long	ph_get_now_time_msec(void)
+# include <pthread.h>
+
+typedef struct s_start_flag
 {
-	struct timeval	tv;
-	long			now;
+	pthread_mutex_t	*mutex;
+	bool			is_started;
+}	t_start_flag;
 
-	gettimeofday(&tv, NULL);
-	now = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	return (now);
-}
+typedef struct s_start_time
+{
+	pthread_mutex_t	*mutex;
+	long			time;
+}	t_start_time;
+
+typedef struct s_fork
+{
+	pthread_mutex_t	*mutex;
+	bool			is_used;
+}	t_fork;
+
+typedef struct s_print
+{
+	pthread_mutex_t	*mutex;
+}	t_print;
+
+#endif
