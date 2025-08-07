@@ -3,10 +3,12 @@ NAME = philo
 CFLAGS = -Wall -Werror -Wextra -pthread -I inc/
 SRCS = srcs/main.c \
 	   srcs/ph_init_dining.c \
+	   srcs/ph_init_philos.c \
 	   srcs/ph_philo_routine.c \
 	   srcs/ph_dining.c \
 	   srcs/ph_philo_act_eat.c \
 	   srcs/ph_print_action.c \
+	   srcs/ph_isdead.c \
 	   srcs/utils/ph_atoi.c \
 	   srcs/utils/ph_isnum.c \
 	   srcs/utils/ph_isdigit.c \

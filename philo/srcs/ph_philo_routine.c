@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo_routine.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 08:45:19 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 19:34:43 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/07 22:19:04 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,49 +28,39 @@ void	*ph_philo_routine(void *arg)
 {
 	t_philo			*philo;
 	t_philo_info	*philo_info;
+	int				ret;
 
 	philo = (t_philo *)arg;
 	philo_info = philo->philo_info;
 	pthread_mutex_lock(philo->table_info->start_time->mutex);
 	pthread_mutex_unlock(philo->table_info->start_time->mutex);
 	if (philo_info->id % 2 == 0)
-	{
 		ph_usleep(10);
-	}
 	while (true)
 	{
-		if (ph_philo_action(philo) != PHILO_ALIVE)
+		ret = ph_philo_action(philo);
+		if (ret != PHILO_ALIVE)
 			break ;
+	}
+	if (ret == PHILO_DEAD)
+	{
+		ph_print_action(philo, PHILO_DEATH);
+		philo_info->is_alive = false;
 	}
 	return (NULL);
 }
 
 int	ph_philo_action(t_philo *philo)
-{	
-	ph_philo_act_eat(philo);
-	philo->philo_info->last_eat_time = ph_get_now_time_msec() - philo->table_info->start_time->time;
+{
+	int	ret;
+
+	ret = ph_philo_act_eat(philo);
+	if (ret != PHILO_ALIVE)
+		return (ret);
+	philo->philo_info->last_eat_time
+		= ph_get_now_time_msec() - philo->table_info->start_time->time;
 	ph_print_action(philo, PHILO_SLEEP);
-	ph_usleep(philo->philo_info->data->time_to_sleep);
+	ph_usleep(philo->philo_info->philo_data.time_to_sleep);
 	ph_print_action(philo, PHILO_THINK);
 	return (PHILO_ALIVE);
 }
-
-
-// void	ph_wait_for_start(t_philo_info *philo_info)
-// {
-// 	while (true)
-// 	{
-// 		pthread_mutex_lock(philo_info->start_flag->mutex);
-// 		if (philo_info->start_flag->is_started)
-// 		{
-// 			pthread_mutex_unlock(philo_info->start_flag->mutex);
-// 			break ;
-// 		}
-// 		pthread_mutex_unlock(philo_info->start_flag->mutex);
-// 	}
-// }
-
-// int		philo_eat(t_philo *philo)
-// {
-// 	return (ALLIVE);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_status.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 03:01:43 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 18:58:08 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/07 21:51:12 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_arg_status
 typedef enum e_philo_status
 {
 	PHILO_ALIVE,
+	PHILO_FULL,
 	PHILO_DEAD,
 	PHILO_EXIT
 }	t_philo_status;

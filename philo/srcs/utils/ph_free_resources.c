@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_free_resources.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 15:45:32 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 15:24:19 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/07 22:01:28 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ void	ph_free_resources(t_dining *dining)
 	int	i;
 
 	if (!dining)
-		return;
+		return ;
 	if (dining->philos)
 	{
-		for (i = 0; i < dining->data->philo_num; i++)
+		for (i = 0; i < dining->data.philo_num; i++)
 		{
-			if (dining->philos[i].philo_info)
-			{
-				free(dining->philos[i].philo_info);
-			}
+			if (dining->philos[i]->philo_info)
+				free(dining->philos[i]->philo_info);
+			free(dining->philos[i]);
 		}
 		free(dining->philos);
 	}
@@ -35,7 +34,7 @@ void	ph_free_resources(t_dining *dining)
 		free(dining->threads);
 	if (dining->forks)
 	{
-		for (i = 0; i < dining->data->philo_num; i++)
+		for (i = 0; i < dining->data.philo_num; i++)
 		{
 			if (dining->forks[i])
 			{
@@ -51,12 +50,6 @@ void	ph_free_resources(t_dining *dining)
 	}
 	if (dining->table_info)
 	{
-		if (dining->table_info->start_flag)
-		{
-			pthread_mutex_destroy(dining->table_info->start_flag->mutex);
-			free(dining->table_info->start_flag->mutex);
-			free(dining->table_info->start_flag);
-		}
 		if (dining->table_info->start_time)
 		{
 			pthread_mutex_destroy(dining->table_info->start_time->mutex);
@@ -74,6 +67,5 @@ void	ph_free_resources(t_dining *dining)
 		}
 		free(dining->print);
 	}
-	free(dining->data);
 	free(dining);
 }

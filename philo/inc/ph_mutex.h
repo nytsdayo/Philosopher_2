@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_mutex.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:28:39 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/29 14:50:14 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/07 22:02:02 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define PH_MUTEX_H
 
 # include <pthread.h>
-
-typedef struct s_start_flag
-{
-	pthread_mutex_t	*mutex;
-	bool			is_started;
-}	t_start_flag;
 
 typedef struct s_start_time
 {
