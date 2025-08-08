@@ -61,7 +61,6 @@ static int	ph_init_philo(t_philo **philo_ptr,
 	}
 	(*philo_ptr)->philo_info->is_alive->is_alive = true;
 	(*philo_ptr)->table_info->start_time->time = ph_get_now_time_msec();
-	(*philo_ptr)->table_info->start_time->mutex = dining->table_info->start_time->mutex;
 	(*philo_ptr)->philo_info->philo_data = philo_data;
 	return (PH_SUCCESS);
 }
