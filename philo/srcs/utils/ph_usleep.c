@@ -13,26 +13,17 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <stdbool.h>
-
-static long	get_now_time(void)
-{
-	struct timeval	tv;
-	long			time_in_ms;
-
-	gettimeofday(&tv, NULL);
-	time_in_ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	return (time_in_ms);
-}
+#include "ph_utils.h"
 
 void	ph_usleep(long time_in_ms)
 {
 	long	start_time;
 	long	current_time;
 
-	start_time = get_now_time();
+	start_time = ph_get_now_time_msec();
 	while (true)
 	{
-		current_time = get_now_time();
+		current_time = ph_get_now_time_msec();
 		if (current_time - start_time >= time_in_ms)
 			break ;
 		usleep(100);
