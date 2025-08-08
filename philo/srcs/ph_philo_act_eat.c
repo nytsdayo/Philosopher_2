@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:51:44 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/07 22:36:35 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/08 00:00:10 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ int	ph_philo_act_eat(t_philo *philo)
 			ret = ph_philo_eat_odd(philo);
 		if (ret == TAKEN)
 			break ;
-		usleep(5);
+		usleep(100); // Sleep to avoid busy waiting
 	}
 	ph_print_action(philo, PHILO_EAT);
-	ph_usleep(philo->philo_info->philo_data.time_to_eat);
+	ret = ph_act_usleep(philo, philo->philo_info->philo_data.time_to_eat);
 	philo->philo_info->left_fork->is_used = false;
 	philo->philo_info->right_fork->is_used = false;
+	if (ret != PHILO_ALIVE)
+		return (ret);
 	philo->philo_info->eat_count++;
 	philo->philo_info->last_eat_time
 		= ph_get_now_time_msec() - philo->table_info->start_time->time;

@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:36:28 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/07 22:30:40 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/07 23:56:18 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 int		ph_philo_act(t_philo *philo);
 int 	ph_philo_act_eat(t_philo *philo);
+int 	ph_act_usleep(t_philo *philo, long time);
 void	ph_print_action(t_philo *philo, const char *action);
 bool	ph_isdead(t_philo *philo_info);
 #endif

@@ -15,6 +15,7 @@ SRCS = srcs/main.c \
 	   srcs/utils/ph_nop.c \
 	   srcs/utils/ph_free_resources.c \
 	   srcs/utils/ph_usleep.c \
+	   srcs/utils/ph_act_usleep.c \
 	   srcs/utils/ph_get_now_time.c
 OBJS = $(SRCS:.c=.o)
 INCS = inc/
