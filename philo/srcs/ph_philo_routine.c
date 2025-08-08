@@ -38,15 +38,17 @@ void	*ph_philo_routine(void *arg)
 		ph_usleep(10);
 	while (true)
 	{
+		if (ph_philo_is_full(philo->philo_info))
+		{
+			ret = PHILO_FULL;
+			break ;
+		}
 		ret = ph_philo_action(philo);
 		if (ret != PHILO_ALIVE)
 			break ;
 	}
-	if (ret == PHILO_DEAD)
-	{
-		ph_print_action(philo, PHILO_DEATH);
-		philo_info->is_alive = false;
-	}
+	// The monitor thread will handle death printing and state changes.
+	(void)ret;
 	return (NULL);
 }
 
@@ -57,12 +59,12 @@ int	ph_philo_action(t_philo *philo)
 	ret = ph_philo_act_eat(philo);
 	if (ret != PHILO_ALIVE)
 		return (ret);
-	philo->philo_info->last_eat_time
-		= ph_get_now_time_msec() - philo->table_info->start_time->time;
-	ph_print_action(philo, PHILO_SLEEP);
+	if (!ph_safe_print(philo, PHILO_SLEEP))
+		return (PHILO_EXIT);
 	ret = ph_act_usleep(philo, philo->philo_info->philo_data.time_to_sleep);
 	if (ret != PHILO_ALIVE)
 		return (ret);
-	ph_print_action(philo, PHILO_THINK);
+	if (!ph_safe_print(philo, PHILO_THINK))
+		return (PHILO_EXIT);
 	return (PHILO_ALIVE);
 }

@@ -7,9 +7,13 @@
 bool	ph_isdead(t_philo *philo)
 {
 	long	current_time;
+	long	last_eat;
 
+	pthread_mutex_lock(&philo->philo_info->last_eat_time_mutex);
+	last_eat = philo->philo_info->last_eat_time;
+	pthread_mutex_unlock(&philo->philo_info->last_eat_time_mutex);
 	current_time = ph_get_now_time_msec() - philo->table_info->start_time->time;
-	if (current_time - philo->philo_info->last_eat_time
+	if (current_time - last_eat
 		> philo->philo_info->philo_data.time_to_die)
 	{
 		pthread_mutex_lock(&philo->philo_info->is_alive->mutex);

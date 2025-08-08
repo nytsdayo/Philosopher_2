@@ -18,7 +18,9 @@ SRCS = srcs/main.c \
 	   srcs/utils/ph_free_resources.c \
 	   srcs/utils/ph_usleep.c \
 	   srcs/utils/ph_act_usleep.c \
-	   srcs/utils/ph_get_now_time.c
+	   srcs/utils/ph_get_now_time.c \
+	   srcs/utils/ph_safe_print.c \
+	   srcs/utils/ph_is_full.c
 OBJS = $(SRCS:.c=.o)
 INCS = inc/
 
@@ -39,6 +41,6 @@ fclean: clean
 re: fclean all
 
 test:
-	@bash ../test.sh
+	@bash ../test_args.sh
 
 .PHONY: all clean fclean re test

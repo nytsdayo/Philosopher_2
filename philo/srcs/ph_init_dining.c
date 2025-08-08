@@ -61,7 +61,6 @@ int	ph_init_forks(t_fork **forks, int philo_num)
 				pthread_mutex_destroy(&forks[j]->mutex);
 			return (PH_MUTEX_ERROR);
 		}
-		forks[i]->is_used = false;
 		i++;
 	}
 	return (PH_SUCCESS);

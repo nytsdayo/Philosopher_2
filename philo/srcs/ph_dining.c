@@ -65,7 +65,7 @@ int				ph_run_dining(t_dining *dining)
 {
 	int	i;
 
-	pthread_mutex_lock(&dining->table_info->start_time->mutex);
+	dining->table_info->start_time->time = ph_get_now_time_msec();
 	i = 0;
 	while (i < dining->data.philo_num)
 	{
@@ -80,8 +80,6 @@ int				ph_run_dining(t_dining *dining)
 	pthread_create(&dining->monitor_thread, NULL,
 		ph_monitor_routine, dining);
 	pthread_detach(dining->monitor_thread);
-	dining->table_info->start_time->time = ph_get_now_time_msec();
-	pthread_mutex_unlock(&dining->table_info->start_time->mutex);
 	i = 0;
 	while (i < dining->data.philo_num)
 	{
