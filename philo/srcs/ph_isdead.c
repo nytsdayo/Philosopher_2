@@ -12,7 +12,9 @@ bool	ph_isdead(t_philo *philo)
 	if (current_time - philo->philo_info->last_eat_time
 		> philo->philo_info->philo_data.time_to_die)
 	{
-		philo->philo_info->is_alive = false;
+		pthread_mutex_lock(&philo->philo_info->is_alive.mutex);
+		philo->philo_info->is_alive.value = false;
+		pthread_mutex_unlock(&philo->philo_info->is_alive.mutex);
 		return (true);
 	}
 	return (false);
