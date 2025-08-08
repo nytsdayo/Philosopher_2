@@ -3,38 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ph_dining.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 08:32:05 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/13 23:51:10 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/07 22:40:07 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_dining.h"
 #include <stdlib.h>
 #include "ph_status.h"
+#include "ph_utils.h"
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
 
-t_dining_data	*ph_get_dining_data(char **argv);
-
-int	ph_dining(char **argv)
+int	ph_dining(t_dining_data dining_data)
 {
-	//get dining_data
-	// const t_dining_data	dining_data = ph_get_dining_data(argv);
+	int			i;
+	t_dining	*dining;
+	int			ret;
 
+	ret = ph_init_dining(&dining, dining_data);
+	if (ret != PH_SUCCESS)
+	{
+		fprintf(stderr, "Error initializing dining: %d\n", ret);
+		if (ret == PH_MEMORY_ERROR)
+			fprintf(stderr, "Memory allocation error\n");
+		if (dining)
+			ph_free_resources(dining);
+		return (ret);
+	}
+	ret = ph_init_philos(&dining->philos, dining);
+	if (ret != PH_SUCCESS)
+	{
+		fprintf(stderr, "Error initializing philosophers: %d\n", ret);
+		ph_free_resources(dining);
+		return (ret);
+	}
+	pthread_mutex_lock(dining->table_info->start_time->mutex);
+	for (i = 0; i < dining_data.philo_num; i++)
+	{
+		pthread_create(&dining->threads[i], NULL, &ph_philo_routine, dining->philos[i]);
+	}
+	dining->table_info->start_time->time = ph_get_now_time_msec();
+	pthread_mutex_unlock(dining->table_info->start_time->mutex);
+	for (i = 0; i < dining_data.philo_num; i++)
+		pthread_join(dining->threads[i], NULL);
+	ph_free_resources(dining);
 	return (PH_SUCCESS);
 }
-t_dining_data	*ph_get_dining_data(char **argv)
+
+t_philo_data	ph_get_philo_data(t_dining_data data)
 {
-	t_dining_data	*dining_data;
+	t_philo_data	philo_data;
 
-	dining_data = malloc(sizeof(t_dining_data));
-	if (!dining_data)
-		return (NULL);
-	dining_data->philo_num = atoi(argv[1]);
-	dining_data->time_to_die = atoi(argv[2]);
-	dining_data->time_to_eat = atoi(argv[3]);
-	dining_data->time_to_sleep = atoi(argv[4]);
-	return (dining_data);
+	philo_data.time_to_die = data.time_to_die;
+	philo_data.time_to_eat = data.time_to_eat;
+	philo_data.time_to_sleep = data.time_to_sleep;
+	philo_data.max_eat_count = data.max_eat_count;
+	return (philo_data);
 }
-
-

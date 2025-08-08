@@ -1,45 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_status.h                                        :+:      :+:    :+:   */
+/*   ph_mutex.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 03:01:43 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/07 21:51:12 by nyts             ###   ########.fr       */
+/*   Created: 2025/07/29 12:28:39 by rnakatan          #+#    #+#             */
+/*   Updated: 2025/08/07 22:02:02 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PH_STATUS_H
-# define PH_STATUS_H
+#ifndef PH_MUTEX_H
+# define PH_MUTEX_H
 
-typedef enum e_arg_status
-{
-	PH_VAILD_ARG,
-	PH_INVAlID_ARGC,
-	PH_INVALID_NOT_NUM,
-	PH_INVALID_OUT_OF_RANGE,
-	PH_MEMORY_ERROR,
-	PH_MUTEX_ERROR,
-}	t_arg_status;
+# include <pthread.h>
 
-typedef enum e_philo_status
+typedef struct s_start_time
 {
-	PHILO_ALIVE,
-	PHILO_FULL,
-	PHILO_DEAD,
-	PHILO_EXIT
-}	t_philo_status;
+	pthread_mutex_t	*mutex;
+	long			time;
+}	t_start_time;
 
-typedef enum e_fork_status
+typedef struct s_fork
 {
-	NOT_TAKEN,
-	TAKEN
-}	t_fork_status;
+	pthread_mutex_t	*mutex;
+	bool			is_used;
+}	t_fork;
 
-typedef enum e_dining_status
+typedef struct s_print
 {
-	PH_SUCCESS,
-}	t_dining_status;
+	pthread_mutex_t	*mutex;
+}	t_print;
 
 #endif

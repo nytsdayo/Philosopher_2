@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_print_err.c                                     :+:      :+:    :+:   */
+/*   ph_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 03:08:31 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/13 23:53:08 by rnakatan         ###   ########.fr       */
+/*   Created: 2025/07/15 00:59:23 by rnakatan          #+#    #+#             */
+/*   Updated: 2025/07/15 01:00:42 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// must imprement output error
-void	ph_print_err(void)
+#include <stdbool.h>
+
+bool	ph_isdigit(char c)
 {
-	return ;
+	return ('0' <= c && c <= '9');
 }
