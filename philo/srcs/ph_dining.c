@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 08:32:05 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/07 22:40:07 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/08 12:46:15 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
+static int	ph_run_dining(t_dining *dining);
+
 static void	ph_handle_single_philosopher(t_dining_data dining_data)
 {
 	printf("0 1 has taken a fork\n");
@@ -27,42 +29,69 @@ static void	ph_handle_single_philosopher(t_dining_data dining_data)
 
 int	ph_dining(t_dining_data dining_data)
 {
-	int			i;
 	t_dining	*dining;
 	int			ret;
 
 	if (dining_data.philo_num == 1)
-	{
 		ph_handle_single_philosopher(dining_data);
-		return (PH_SUCCESS);
-	}
-	ret = ph_init_dining(&dining, dining_data);
-	if (ret != PH_SUCCESS)
+	else
 	{
-		fprintf(stderr, "Error initializing dining: %d\n", ret);
-		if (ret == PH_MEMORY_ERROR)
-			fprintf(stderr, "Memory allocation error\n");
-		if (dining)
+		ret = ph_init_dining(&dining, dining_data);
+		if (ret != PH_SUCCESS)
+		{
+			fprintf(stderr, "Error initializing dining: %d\n", ret);
+			if (ret == PH_MEMORY_ERROR)
+				fprintf(stderr, "Memory allocation error\n");
+			if (dining)
+				ph_free_resources(dining);
+			return (ret);
+		}
+		ret = ph_init_philos(&dining->philos, dining);
+		if (ret != PH_SUCCESS)
+		{
+			fprintf(stderr, "Error initializing philosophers: %d\n", ret);
 			ph_free_resources(dining);
-		return (ret);
-	}
-	ret = ph_init_philos(&dining->philos, dining);
-	if (ret != PH_SUCCESS)
-	{
-		fprintf(stderr, "Error initializing philosophers: %d\n", ret);
+			return (ret);
+		}
+		ret = ph_run_dining(dining);
+		if (ret != PH_SUCCESS)
+			return (ret);
 		ph_free_resources(dining);
-		return (ret);
 	}
-	pthread_mutex_lock(dining->table_info->start_time->mutex);
-	for (i = 0; i < dining_data.philo_num; i++)
+	return (PH_SUCCESS);
+}
+
+int				ph_run_dining(t_dining *dining)
+{
+	int	i;
+
+	pthread_mutex_lock(&dining->table_info->start_time->mutex);
+	i = 0;
+	while (i < dining->data.philo_num)
 	{
-		pthread_create(&dining->threads[i], NULL, &ph_philo_routine, dining->philos[i]);
+		if (pthread_create(&dining->philo_threads[i], NULL,
+				ph_philo_routine, dining->philos[i]) != 0)
+		{
+			fprintf(stderr, "Error creating thread for philosopher %d\n", i + 1);
+			return (PH_MEMORY_ERROR);
+		}
+		i++;
 	}
+	pthread_create(&dining->monitor_thread, NULL,
+		ph_monitor_routine, dining);
+	pthread_detach(dining->monitor_thread);
 	dining->table_info->start_time->time = ph_get_now_time_msec();
-	pthread_mutex_unlock(dining->table_info->start_time->mutex);
-	for (i = 0; i < dining_data.philo_num; i++)
-		pthread_join(dining->threads[i], NULL);
-	ph_free_resources(dining);
+	pthread_mutex_unlock(&dining->table_info->start_time->mutex);
+	i = 0;
+	while (i < dining->data.philo_num)
+	{
+		if (pthread_join(dining->philo_threads[i], NULL) != 0)
+		{
+			fprintf(stderr, "Error joining thread for philosopher %d\n", i + 1);
+			return (PH_THREAD_ERROR);
+		}
+		i++;
+	}
 	return (PH_SUCCESS);
 }
 

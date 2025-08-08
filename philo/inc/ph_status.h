@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 03:01:43 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/07 21:51:12 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/08 12:00:21 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef enum e_arg_status
 	PH_INVALID_OUT_OF_RANGE,
 	PH_MEMORY_ERROR,
 	PH_MUTEX_ERROR,
+	PH_THREAD_ERROR,
 }	t_arg_status;
 
 typedef enum e_philo_status

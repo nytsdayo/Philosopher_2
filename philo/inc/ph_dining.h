@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 09:44:53 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/07 22:02:58 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/08 12:39:30 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ typedef struct s_philo_info
 	t_print			*print_mutex;
 	t_philo_data	philo_data;
 	int				eat_count;
-	bool			is_alive;
+	t_philo_alive	*is_alive;
 }	t_philo_info;
 
 typedef struct s_table_info
 {
 	int				philo_num;
 	t_start_time	*start_time;
+	t_table_status	status;
 }	t_table_info;
 
 typedef struct s_philo
@@ -61,7 +62,8 @@ typedef struct s_philo
 
 typedef struct t_dining
 {
-	pthread_t		*threads;
+	pthread_t		*philo_threads;
+	pthread_t		monitor_thread;
 	t_fork			**forks;
 	t_philo			**philos;
 	t_print			*print;
@@ -72,6 +74,7 @@ typedef struct t_dining
 int		ph_init_dining(t_dining **dining_ptr, t_dining_data data);
 int		ph_init_philos(t_philo ***philos_ptr, t_dining *dining);
 void	*ph_philo_routine(void *arg);
+void	*ph_monitor_routine(void *arg);
 int		ph_dining(t_dining_data data);
 
 #endif

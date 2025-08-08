@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 08:45:19 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/07 22:19:04 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/08 12:56:38 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	*ph_philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	philo_info = philo->philo_info;
-	pthread_mutex_lock(philo->table_info->start_time->mutex);
-	pthread_mutex_unlock(philo->table_info->start_time->mutex);
+	pthread_mutex_lock(&philo->table_info->start_time->mutex);
+	pthread_mutex_unlock(&philo->table_info->start_time->mutex);
 	if (philo_info->id % 2 == 0)
 		ph_usleep(10);
 	while (true)
@@ -60,7 +60,9 @@ int	ph_philo_action(t_philo *philo)
 	philo->philo_info->last_eat_time
 		= ph_get_now_time_msec() - philo->table_info->start_time->time;
 	ph_print_action(philo, PHILO_SLEEP);
-	ph_usleep(philo->philo_info->philo_data.time_to_sleep);
+	ret = ph_act_usleep(philo, philo->philo_info->philo_data.time_to_sleep);
+	if (ret != PHILO_ALIVE)
+		return (ret);
 	ph_print_action(philo, PHILO_THINK);
 	return (PHILO_ALIVE);
 }
