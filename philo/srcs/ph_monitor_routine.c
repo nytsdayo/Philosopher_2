@@ -24,12 +24,18 @@ void	*ph_monitor_routine(void *arg)
 		i = 0;
 		while (i < dining->data.philo_num)
 		{
-			if (!dining->philos[i]->philo_info->is_alive)
 			{
-				pthread_mutex_lock(&dining->table_info->status.mutex);
-				dining->table_info->status.is_running = false;
-				pthread_mutex_unlock(&dining->table_info->status.mutex);
-				return (NULL);
+				bool is_alive;
+				pthread_mutex_lock(&dining->philos[i]->philo_info->is_alive->mutex);
+				is_alive = dining->philos[i]->philo_info->is_alive->value;
+				pthread_mutex_unlock(&dining->philos[i]->philo_info->is_alive->mutex);
+				if (!is_alive)
+				{
+					pthread_mutex_lock(&dining->table_info->status.mutex);
+					dining->table_info->status.is_running = false;
+					pthread_mutex_unlock(&dining->table_info->status.mutex);
+					return (NULL);
+				}
 			}
 			i++;
 		}
