@@ -33,7 +33,7 @@ int	ph_atoi(const char *nptr)
 		mns_flag = judge_flag(nptr[i++]);
 	while (nptr[i] == '0')
 		i++;
-	if (ph_isdigit(nptr[i]) == false || nptr[i] == '0')
+	if (ph_isdigit(nptr[i]) == false)
 		return (0);
 	while (ph_isdigit(nptr[i]))
 	{
