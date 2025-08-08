@@ -24,6 +24,13 @@ int	ph_dining(t_dining_data dining_data)
 	t_dining	*dining;
 	int			ret;
 
+	if (dining_data.philo_num == 1)
+	{
+		printf("0 1 has taken a fork\n");
+		ph_usleep(dining_data.time_to_die);
+		printf("%d 1 died\n", dining_data.time_to_die);
+		return (PH_SUCCESS);
+	}
 	ret = ph_init_dining(&dining, dining_data);
 	if (ret != PH_SUCCESS)
 	{
