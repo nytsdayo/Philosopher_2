@@ -2,6 +2,7 @@ NAME = philo
 
 CFLAGS = -Wall -Werror -Wextra -pthread -I inc/
 SRCS = srcs/main.c \
+	   srcs/ph_argument_check.c \
 	   srcs/ph_init_dining.c \
 	   srcs/ph_init_philos.c \
 	   srcs/ph_philo_routine.c \
