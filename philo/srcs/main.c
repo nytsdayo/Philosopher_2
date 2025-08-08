@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	if (argc == 6)
 		dining_data.max_eat_count = ph_atoi(argv[5]);
 	else
-		dining_data.max_eat_count = 0;
+		dining_data.max_eat_count = -1;
 	if (ph_dining(dining_data) != PH_SUCCESS)
 	{
 		fprintf(stderr, "ph_dining error\n");
