@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:36:28 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/07 23:56:18 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/08 13:32:09 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define PHILO_EAT "is eating"
 # define PHILO_SLEEP "is sleeping"
 # define PHILO_THINK "is thinking"
-# define PHILO_DEATH "is dead"
+# define PHILO_DEATH "is died"
 
 int		ph_philo_act(t_philo *philo);
 int 	ph_philo_act_eat(t_philo *philo);

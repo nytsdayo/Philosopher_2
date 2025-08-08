@@ -5,6 +5,7 @@ SRCS = srcs/main.c \
 	   srcs/ph_init_dining.c \
 	   srcs/ph_init_philos.c \
 	   srcs/ph_philo_routine.c \
+	   srcs/ph_monitor_routine.c \
 	   srcs/ph_dining.c \
 	   srcs/ph_philo_act_eat.c \
 	   srcs/ph_print_action.c \
