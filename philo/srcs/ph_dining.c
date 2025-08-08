@@ -18,6 +18,13 @@
 #include <stdio.h>
 #include <unistd.h>
 
+static void	ph_handle_single_philosopher(t_dining_data dining_data)
+{
+	printf("0 1 has taken a fork\n");
+	ph_usleep(dining_data.time_to_die);
+	printf("%d 1 died\n", dining_data.time_to_die);
+}
+
 int	ph_dining(t_dining_data dining_data)
 {
 	int			i;
@@ -26,9 +33,7 @@ int	ph_dining(t_dining_data dining_data)
 
 	if (dining_data.philo_num == 1)
 	{
-		printf("0 1 has taken a fork\n");
-		ph_usleep(dining_data.time_to_die);
-		printf("%d 1 died\n", dining_data.time_to_die);
+		ph_handle_single_philosopher(dining_data);
 		return (PH_SUCCESS);
 	}
 	ret = ph_init_dining(&dining, dining_data);
