@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 08:32:05 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/08 12:46:15 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/08 15:20:10 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int				ph_run_dining(t_dining *dining)
 {
 	int	i;
 
+	// Lock the gate mutex. All philosopher threads will block on this lock
+	// as soon as they start, ensuring they are all ready before the timer begins.
 	pthread_mutex_lock(&dining->table_info->start_time->mutex);
 	i = 0;
 	while (i < dining->data.philo_num)
@@ -80,7 +82,9 @@ int				ph_run_dining(t_dining *dining)
 	pthread_create(&dining->monitor_thread, NULL,
 		ph_monitor_routine, dining);
 	pthread_detach(dining->monitor_thread);
+	// Set the official start time now that all threads are created.
 	dining->table_info->start_time->time = ph_get_now_time_msec();
+	// Unlock the gate, releasing all philosopher threads to start simultaneously.
 	pthread_mutex_unlock(&dining->table_info->start_time->mutex);
 	i = 0;
 	while (i < dining->data.philo_num)

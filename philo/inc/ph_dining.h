@@ -40,6 +40,7 @@ typedef struct s_philo_info
 	t_fork			*left_fork;
 	t_fork			*right_fork;
 	long			last_eat_time;
+	pthread_mutex_t	last_eat_time_mutex;
 	t_print			*print_mutex;
 	t_philo_data	philo_data;
 	int				eat_count;

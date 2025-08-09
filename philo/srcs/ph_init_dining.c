@@ -6,7 +6,7 @@
 /*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:49:38 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/08 12:54:41 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/08 15:28:38 by nyts             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	ph_init_forks(t_fork **forks, int philo_num)
 				pthread_mutex_destroy(&forks[j]->mutex);
 			return (PH_MUTEX_ERROR);
 		}
-		forks[i]->is_used = false;
 		i++;
 	}
 	return (PH_SUCCESS);

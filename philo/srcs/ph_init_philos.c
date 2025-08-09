@@ -50,17 +50,15 @@ static int	ph_init_philo(t_philo **philo_ptr,
 	(*philo_ptr)->philo_info->last_eat_time = 0;
 	(*philo_ptr)->philo_info->print_mutex = dining->print;
 	(*philo_ptr)->philo_info->eat_count = 0;
+	if (pthread_mutex_init(&(*philo_ptr)->philo_info->last_eat_time_mutex, NULL) != 0)
+		return (PH_MUTEX_ERROR);
 	(*philo_ptr)->philo_info->is_alive = malloc(sizeof(t_philo_alive));
 	if (!(*philo_ptr)->philo_info->is_alive)
 		return (PH_MEMORY_ERROR);
 	if (pthread_mutex_init(&(*philo_ptr)->philo_info->is_alive->mutex
 			, NULL) != 0)
-	{
-		free((*philo_ptr)->philo_info->is_alive);
 		return (PH_MUTEX_ERROR);
-	}
 	(*philo_ptr)->philo_info->is_alive->value = true;
-	(*philo_ptr)->table_info->start_time->time = ph_get_now_time_msec();
 	(*philo_ptr)->philo_info->philo_data = philo_data;
 	return (PH_SUCCESS);
 }

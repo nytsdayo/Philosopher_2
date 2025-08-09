@@ -7,22 +7,25 @@
 #include "ph_utils.h"
 #include "ph_status.h"
 
-#define PHILO_NUM 5
-#define DEAD_TIME 800
-#define EAT_TIME 200
-#define SLEEP_TIME 200
-#define MAX_EAT_COUNT 0
-
 int	main(int argc, char **argv)
 {
-	t_dining_data dining_data;
-	(void)argc;
-	(void)argv;
-	dining_data.philo_num = PHILO_NUM;
-	dining_data.time_to_die = DEAD_TIME;
-	dining_data.time_to_eat = EAT_TIME;
-	dining_data.time_to_sleep = SLEEP_TIME;
-	dining_data.max_eat_count = MAX_EAT_COUNT;
+	t_dining_data	dining_data;
+	int				arg_status;
+
+	arg_status = ph_argument_check(argv, argc);
+	if (arg_status != PH_VAILD_ARG)
+	{
+		fprintf(stderr, "Invalid arguments\n");
+		return (1);
+	}
+	dining_data.philo_num = ph_atoi(argv[1]);
+	dining_data.time_to_die = ph_atoi(argv[2]);
+	dining_data.time_to_eat = ph_atoi(argv[3]);
+	dining_data.time_to_sleep = ph_atoi(argv[4]);
+	if (argc == 6)
+		dining_data.max_eat_count = ph_atoi(argv[5]);
+	else
+		dining_data.max_eat_count = -1;
 	if (ph_dining(dining_data) != PH_SUCCESS)
 	{
 		fprintf(stderr, "ph_dining error\n");

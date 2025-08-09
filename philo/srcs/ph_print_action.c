@@ -14,19 +14,13 @@
 #include <stdio.h>
 #include "ph_utils.h"
 
+// This function's only job is to serialize output.
+// The caller must check if the simulation is still running before calling it.
 void	ph_print_action(t_philo *philo, const char *action)
 {
 	long	now_time;
 
 	pthread_mutex_lock(&philo->philo_info->print_mutex->mutex);
-	pthread_mutex_lock(&philo->table_info->status.mutex);
-	if (!philo->table_info->status.is_running)
-	{
-		pthread_mutex_unlock(&philo->philo_info->print_mutex->mutex);
-		pthread_mutex_unlock(&philo->table_info->status.mutex);
-		return ;
-	}
-	pthread_mutex_unlock(&philo->table_info->status.mutex);
 	now_time = ph_get_now_time_msec();
 	printf("%ld %d %s\n", now_time - philo->table_info->start_time->time,
 		philo->philo_info->id, action);

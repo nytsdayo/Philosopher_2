@@ -36,7 +36,6 @@ typedef struct s_philo_alive
 typedef struct s_fork
 {
 	pthread_mutex_t	mutex;
-	bool			is_used;
 }	t_fork;
 
 typedef struct s_print

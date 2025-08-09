@@ -2,6 +2,7 @@ NAME = philo
 
 CFLAGS = -Wall -Werror -Wextra -pthread -I inc/
 SRCS = srcs/main.c \
+	   srcs/ph_argument_check.c \
 	   srcs/ph_init_dining.c \
 	   srcs/ph_init_philos.c \
 	   srcs/ph_philo_routine.c \
@@ -17,7 +18,9 @@ SRCS = srcs/main.c \
 	   srcs/utils/ph_free_resources.c \
 	   srcs/utils/ph_usleep.c \
 	   srcs/utils/ph_act_usleep.c \
-	   srcs/utils/ph_get_now_time.c
+	   srcs/utils/ph_get_now_time.c \
+	   srcs/utils/ph_safe_print.c \
+	   srcs/utils/ph_is_full.c
 OBJS = $(SRCS:.c=.o)
 INCS = inc/
 
@@ -38,6 +41,6 @@ fclean: clean
 re: fclean all
 
 test:
-	@bash ../test.sh
+	@bash ../test_args.sh
 
 .PHONY: all clean fclean re test
