@@ -15,5 +15,5 @@ jobs:
 
     - name: Build and Test
       run: |
-        cd philo
-        make test
+        chmod +x test_args.sh
+        ./test_args.sh
