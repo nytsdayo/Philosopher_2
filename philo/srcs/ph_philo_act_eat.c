@@ -71,8 +71,6 @@ static void	ph_take_forks(t_philo *philo)
 
 static void	ph_release_forks(t_philo *philo)
 {
-	// The order of unlocking does not matter for correctness,
-	// but unlocking in the reverse order of locking is conventional.
 	if (philo->philo_info->id % 2 == 0)
 	{
 		pthread_mutex_unlock(&philo->philo_info->left_fork->mutex);
@@ -84,4 +82,3 @@ static void	ph_release_forks(t_philo *philo)
 		pthread_mutex_unlock(&philo->philo_info->left_fork->mutex);
 	}
 }
-

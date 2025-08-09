@@ -32,6 +32,7 @@ void	*ph_philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	philo_info = philo->philo_info;
+	// Wait at the "gate" until the main thread sets the start time and unlocks it.
 	pthread_mutex_lock(&philo->table_info->start_time->mutex);
 	pthread_mutex_unlock(&philo->table_info->start_time->mutex);
 	if (philo_info->id % 2 == 0)
