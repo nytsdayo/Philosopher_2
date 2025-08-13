@@ -109,6 +109,7 @@ run_sim_test() {
 # --- SCRIPT START ---
 echo "Compiling the project..."
 make -C philo/ re > /dev/null 2>&1
+echo $?
 if [ $? -ne 0 ]; then
     echo -e "${RED}Compilation Failed!${NC}"
     exit 1
@@ -127,6 +128,9 @@ run_arg_test "Zero Philosophers" "0 800 200 200"
 
 # --- SIMULATION TESTS ---
 run_sim_test "Happy Path" 4 800 200 200 7 "full"
+run_sim_test "Happy Path2" 7 800 200 200 7 "full"
+run_sim_test "Happy Path3" 7 600 200 200 7 "full"
+run_sim_test "Just Life" 2 200 100 100 7 "full"
 run_sim_test "Death Condition" 4 200 400 100 "" "death"
 run_sim_test "One Philosopher" 1 800 200 200 "" "death"
 run_sim_test "Zero Meals" 5 800 200 200 0 "no_eat"
