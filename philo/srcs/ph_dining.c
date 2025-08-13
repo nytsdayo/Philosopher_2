@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_dining.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 08:32:05 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/14 04:50:40 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	ph_dining(t_dining_data dining_data)
 
 	dining = NULL;
 	if (dining_data.philo_num == 1)
-	{
 		ph_handle_single_philosopher(dining_data);
-	}
 	else
 	{
 		ret = ph_init_dining(&dining, dining_data);
@@ -104,11 +102,6 @@ static int	ph_run_dining(t_dining *dining)
 		fprintf(stderr, "Error creating monitor thread\n");
 		return (PH_THREAD_ERROR);
 	}
-	if (pthread_detach(dining->monitor_thread) != 0)
-	{
-		fprintf(stderr, "Error detaching monitor thread\n");
-		return (PH_THREAD_ERROR);
-	}
 	dining->table_info->start_time->time = ph_get_now_time_msec();
 	pthread_mutex_unlock(&dining->table_info->start_time->mutex);
 	i = 0;
@@ -121,6 +114,10 @@ static int	ph_run_dining(t_dining *dining)
 		}
 		i++;
 	}
+	if (pthread_detach(dining->monitor_thread) != 0)
+	{
+		fprintf(stderr, "Error detaching monitor thread\n");
+		return (PH_THREAD_ERROR);
+	}
 	return (PH_SUCCESS);
 }
-

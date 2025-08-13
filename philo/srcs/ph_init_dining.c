@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_init_dining.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:49:38 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/14 01:42:35 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ static int	ph_init_forks(t_fork **forks, int philo_num)
 	{
 		forks[i] = malloc(sizeof(t_fork));
 		if (!forks[i])
-		{
 			return (PH_MEMORY_ERROR);
-		}
 		i++;
 	}
 	i = 0;

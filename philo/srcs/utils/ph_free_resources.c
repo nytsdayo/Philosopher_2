@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_free_resources.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 15:45:32 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/14 02:26:43 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,21 @@ void	ph_free_resources(t_dining *dining)
 	int	i;
 
 	if (!dining)
-	{
 		return ;
-	}
 	if (dining->philos)
 	{
 		i = 0;
 		while (i < dining->data.philo_num)
 		{
 			if (dining->philos[i]->philo_info)
-			{
 				free(dining->philos[i]->philo_info);
-			}
 			free(dining->philos[i]);
 			i++;
 		}
 		free(dining->philos);
 	}
 	if (dining->philo_threads)
-	{
 		free(dining->philo_threads);
-	}
 	if (dining->forks)
 	{
 		i = 0;

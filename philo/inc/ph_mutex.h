@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_mutex.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:28:39 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/08 14:40:08 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/14 03:12:20 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct s_philo_alive
 	pthread_mutex_t	mutex;
 	bool			value;
 }	t_philo_alive;
+
+typedef struct s_philo_eat_count
+{
+	pthread_mutex_t	mutex;
+	int				value;
+}	t_philo_eat_count;
 
 typedef struct s_fork
 {

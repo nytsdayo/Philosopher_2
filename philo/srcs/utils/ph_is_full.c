@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_is_full.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 00:00:00 by jules             #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/14 03:36:57 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ bool	ph_philo_is_full(t_philo_info *philo_info)
 	{
 		return (false);
 	}
-	if (philo_info->eat_count >= philo_info->philo_data.max_eat_count)
-	{
+	pthread_mutex_lock(&philo_info->eat_count.mutex);
+	if (philo_info->eat_count.value >= philo_info->philo_data.max_eat_count)
 		return (true);
-	}
+	pthread_mutex_unlock(&philo_info->eat_count.mutex);
 	return (false);
 }

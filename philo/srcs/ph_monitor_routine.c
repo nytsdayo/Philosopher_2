@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_monitor_routine.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 12:07:27 by nyts              #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/14 04:54:54 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@ static bool	ph_stop_simulation(t_dining *dining);
 */
 static bool	ph_monitor_is_full(t_philo_info *philo_info)
 {
+	int		philo_eat_count;
+
+	pthread_mutex_lock(&philo_info->eat_count.mutex);
+	philo_eat_count = philo_info->eat_count.value;
+	pthread_mutex_unlock(&philo_info->eat_count.mutex);
 	if (philo_info->philo_data.max_eat_count < 0)
 	{
 		return (false);
 	}
-	if (philo_info->eat_count >= philo_info->philo_data.max_eat_count)
+	if (philo_eat_count >= philo_info->philo_data.max_eat_count)
 	{
 		return (true);
 	}
@@ -61,6 +66,8 @@ void	*ph_monitor_routine(void *arg)
 	bool		should_exit;
 
 	dining = (t_dining *)arg;
+	pthread_mutex_lock(&dining->table_info->start_time->mutex);
+	pthread_mutex_unlock(&dining->table_info->start_time->mutex);
 	should_exit = false;
 	while (!should_exit)
 	{
@@ -92,7 +99,7 @@ void	*ph_monitor_routine(void *arg)
 		{
 			should_exit = ph_stop_simulation(dining);
 		}
-		usleep(1000);
+		usleep(100);
 	}
 	return (NULL);
 }

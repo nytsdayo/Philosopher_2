@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_status.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 03:01:43 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/08 12:00:21 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/14 01:55:00 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 typedef enum e_arg_status
 {
+	PH_SET_SUCESS = 0,
 	PH_VAILD_ARG,
 	PH_INVAlID_ARGC,
 	PH_INVALID_NOT_NUM,
