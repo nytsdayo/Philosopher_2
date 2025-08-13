@@ -22,7 +22,7 @@ typedef enum e_arg_status
 	PH_MEMORY_ERROR,
 	PH_MUTEX_ERROR,
 	PH_THREAD_ERROR,
-}	t_arg_status;
+}				t_arg_status;
 
 typedef enum e_philo_status
 {
@@ -30,17 +30,17 @@ typedef enum e_philo_status
 	PHILO_FULL,
 	PHILO_DEAD,
 	PHILO_EXIT
-}	t_philo_status;
+}				t_philo_status;
 
 typedef enum e_fork_status
 {
 	NOT_TAKEN,
 	TAKEN
-}	t_fork_status;
+}				t_fork_status;
 
 typedef enum e_dining_status
 {
 	PH_SUCCESS,
-}	t_dining_status;
+}				t_dining_status;
 
 #endif

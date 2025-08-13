@@ -12,7 +12,9 @@
 
 #ifndef PH_UTILS_H
 # define PH_UTILS_H
+
 # include <stdbool.h>
+# include "ph_dining.h"
 
 int		ph_atoi(const char *nptr);
 bool	ph_isdigit(char c);
@@ -21,8 +23,6 @@ void	ph_nop(void);
 int		ph_free_resources(void *ptr);
 void	ph_usleep(long time_in_ms);
 long	ph_get_now_time_msec(void);
-# include "ph_dining.h"
-
 int		ph_argument_check(char **argv, int argc);
 bool	ph_safe_print(t_philo *philo, const char *action);
 bool	ph_philo_is_full(t_philo_info *philo_info);

@@ -14,6 +14,7 @@
 # define PH_MUTEX_H
 
 # include <pthread.h>
+# include <stdbool.h>
 
 typedef struct s_start_time
 {

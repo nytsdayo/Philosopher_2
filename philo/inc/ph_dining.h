@@ -61,7 +61,7 @@ typedef struct s_philo
 	t_table_info	*table_info;
 }	t_philo;
 
-typedef struct t_dining
+typedef struct s_dining
 {
 	pthread_t		*philo_threads;
 	pthread_t		monitor_thread;

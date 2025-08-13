@@ -1,12 +1,29 @@
-#include <pthread.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include "ph_dining.h"
-#include "ph_utils.h"
-#include "ph_status.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/13 00:00:00 by jules             #+#    #+#             */
+/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "ph_dining.h"
+#include "ph_status.h"
+#include "ph_utils.h"
+#include <pthread.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+/*
+** The main function is the entry point of the program.
+** It checks the arguments, initializes the dining data, and starts the dining
+** simulation.
+*/
 int	main(int argc, char **argv)
 {
 	t_dining_data	dining_data;

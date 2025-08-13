@@ -19,11 +19,13 @@
 # define PHILO_EAT "is eating"
 # define PHILO_SLEEP "is sleeping"
 # define PHILO_THINK "is thinking"
+# define PHILO_TAKE_FORK "has taken a fork"
 # define PHILO_DEATH "is died"
 
 int		ph_philo_act(t_philo *philo);
-int 	ph_philo_act_eat(t_philo *philo);
-int 	ph_act_usleep(t_philo *philo, long time);
+int		ph_philo_act_eat(t_philo *philo);
+int		ph_act_usleep(t_philo *philo, long time);
 void	ph_print_action(t_philo *philo, const char *action);
 bool	ph_isdead(t_philo *philo_info);
+
 #endif

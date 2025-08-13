@@ -1,9 +1,27 @@
-#include <stdbool.h>
-#include "ph_utils.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ph_isdead.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/13 00:00:00 by jules             #+#    #+#             */
+/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ph_dining.h"
 #include "ph_status.h"
+#include "ph_utils.h"
+#include <pthread.h>
+#include <stdbool.h>
 #include <stdio.h>
 
+/*
+** Checks if a philosopher has died from starvation.
+** It compares the time since the last meal with the time_to_die.
+** This function is thread-safe.
+*/
 bool	ph_isdead(t_philo *philo)
 {
 	long	current_time;

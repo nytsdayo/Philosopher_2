@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ph_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 00:59:23 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/07/15 01:00:42 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 
+/*
+** Checks if a character is a decimal digit ('0' through '9').
+*/
 bool	ph_isdigit(char c)
 {
 	return ('0' <= c && c <= '9');

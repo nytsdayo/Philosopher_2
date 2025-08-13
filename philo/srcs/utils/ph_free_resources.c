@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_free_resources.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 15:45:32 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/08 12:43:16 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,47 @@
 #include <pthread.h>
 #include <stdlib.h>
 
+/*
+** Frees all allocated resources for the dining simulation, including memory
+** for philosophers, forks, threads, and destroys all mutexes.
+*/
 void	ph_free_resources(t_dining *dining)
 {
 	int	i;
 
 	if (!dining)
+	{
 		return ;
+	}
 	if (dining->philos)
 	{
-		for (i = 0; i < dining->data.philo_num; i++)
+		i = 0;
+		while (i < dining->data.philo_num)
 		{
 			if (dining->philos[i]->philo_info)
+			{
 				free(dining->philos[i]->philo_info);
+			}
 			free(dining->philos[i]);
+			i++;
 		}
 		free(dining->philos);
 	}
 	if (dining->philo_threads)
+	{
 		free(dining->philo_threads);
+	}
 	if (dining->forks)
 	{
-		for (i = 0; i < dining->data.philo_num; i++)
+		i = 0;
+		while (i < dining->data.philo_num)
 		{
 			if (dining->forks[i])
 			{
 				pthread_mutex_destroy(&dining->forks[i]->mutex);
 				free(dining->forks[i]);
 			}
+			i++;
 		}
 		free(dining->forks);
 	}
