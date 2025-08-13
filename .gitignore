@@ -1,2 +1,19 @@
+
+!# Executable files
 philo/philo
+
+# Object files
 *.o
+
+# Log files
+*.log
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Editor specific files
+.vscode/
+*.swp
+*.swo
+*~
