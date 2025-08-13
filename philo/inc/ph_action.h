@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_action.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:36:28 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/08 13:32:09 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/13 20:02:47 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define PHILO_DEATH "is died"
 
 int		ph_philo_act(t_philo *philo);
-int 	ph_philo_act_eat(t_philo *philo);
-int 	ph_act_usleep(t_philo *philo, long time);
+int		ph_philo_act_eat(t_philo *philo);
+int		ph_act_usleep(t_philo *philo, long time);
 void	ph_print_action(t_philo *philo, const char *action);
 bool	ph_isdead(t_philo *philo_info);
 #endif
