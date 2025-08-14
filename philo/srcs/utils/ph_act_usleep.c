@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_act_usleep.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 00:00:00 by jules             #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/14 23:08:02 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include <pthread.h>
 #include <stdbool.h>
 #include <unistd.h>
-
-static bool	ph_isexit(t_philo *philo);
 
 /*
 ** A custom usleep function that sleeps for a specified duration ('time')
@@ -47,17 +45,4 @@ int	ph_act_usleep(t_philo *philo, long time)
 		current_time = ph_get_now_time_msec();
 	}
 	return (PHILO_ALIVE);
-}
-
-/*
-** A thread-safe function to check if the simulation is still running.
-*/
-static bool	ph_isexit(t_philo *philo)
-{
-	bool	is_running;
-
-	pthread_mutex_lock(&philo->table_info->status.mutex);
-	is_running = philo->table_info->status.is_running;
-	pthread_mutex_unlock(&philo->table_info->status.mutex);
-	return (!is_running);
 }

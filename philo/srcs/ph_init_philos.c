@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 00:00:00 by jules             #+#    #+#             */
-/*   Updated: 2025/08/14 03:52:50 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/14 23:13:41 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ static int	ph_set_philo_info(
 			NULL) != 0)
 		return (PH_MUTEX_ERROR);
 	philo_info->eat_count.value = 0;
-	if (pthread_mutex_init(&philo_info->is_alive.mutex,
+	if (pthread_mutex_init(&philo_info->state.mutex,
 			NULL) != 0)
 	{
 		pthread_mutex_destroy(&philo_info->eat_count.mutex);
 		return (PH_MUTEX_ERROR);
 	}
-	philo_info->is_alive.value = true;
+	philo_info->state.value = PHILO_ALIVE;
 	philo_info->philo_data = philo_data;
 	return (PH_SET_SUCESS);
 }

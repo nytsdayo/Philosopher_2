@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_usleep.c                                        :+:      :+:    :+:   */
+/*   ph_ms_sleep.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:31:49 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/15 00:36:49 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** It uses a loop of smaller usleep calls to avoid oversleeping and to be
 ** more accurate.
 */
-void	ph_usleep(long time_in_ms)
+void	ph_ms_sleep(long time_in_ms)
 {
 	long	start_time;
 	long	current_time;

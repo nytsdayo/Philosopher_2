@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:49:38 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/14 01:42:35 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/15 01:20:30 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,23 @@ static int	ph_init_forks(t_fork **forks, int philo_num)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < philo_num)
+	i = -1;
+	while (++i < philo_num)
 	{
 		forks[i] = malloc(sizeof(t_fork));
 		if (!forks[i])
 			return (PH_MEMORY_ERROR);
-		i++;
 	}
-	i = 0;
-	while (i < philo_num)
+	i = -1;
+	while (++i < philo_num)
 	{
 		if (pthread_mutex_init(&forks[i]->mutex, NULL) != 0)
 		{
-			j = 0;
-			while (j < i)
-			{
+			j = -1;
+			while (++j < i)
 				pthread_mutex_destroy(&forks[j]->mutex);
-				j++;
-			}
 			return (PH_MUTEX_ERROR);
 		}
-		i++;
 	}
 	return (PH_SUCCESS);
 }
@@ -94,19 +89,13 @@ static int	ph_init_table_info(t_table_info *table_info, int philo_num)
 	table_info->philo_num = philo_num;
 	table_info->start_time = malloc(sizeof(t_start_time));
 	if (!table_info->start_time)
-	{
 		return (PH_MEMORY_ERROR);
-	}
 	if (pthread_mutex_init(&table_info->start_time->mutex, NULL) != 0)
-	{
 		return (PH_MUTEX_ERROR);
-	}
 	table_info->start_time->time = 0;
 	table_info->status.is_running = true;
 	if (pthread_mutex_init(&table_info->status.mutex, NULL) != 0)
-	{
 		return (PH_MUTEX_ERROR);
-	}
 	return (PH_SUCCESS);
 }
 
@@ -116,9 +105,7 @@ static int	ph_init_table_info(t_table_info *table_info, int philo_num)
 static int	ph_init_print(t_print *print)
 {
 	if (pthread_mutex_init(&print->mutex, NULL) != 0)
-	{
 		return (PH_MUTEX_ERROR);
-	}
 	return (PH_SUCCESS);
 }
 
@@ -139,8 +126,6 @@ static int	ph_malloc_dining(t_dining **dining, t_dining_data data)
 	(*dining)->print = malloc(sizeof(t_print));
 	if (!(*dining)->philo_threads || !(*dining)->forks || !(*dining)->philos
 		|| !(*dining)->table_info || !(*dining)->print)
-	{
 		return (PH_MEMORY_ERROR);
-	}
 	return (PH_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 00:58:12 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/15 01:28:19 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,13 @@ int	ph_atoi(const char *nptr)
 	res = 0;
 	mns_flag = 1;
 	while (ft_isspace(nptr[i]))
-	{
 		i++;
-	}
 	if (nptr[i] == '-' || nptr[i] == '+')
-	{
 		mns_flag = judge_flag(nptr[i++]);
-	}
 	while (nptr[i] == '0')
-	{
 		i++;
-	}
 	if (ph_isdigit(nptr[i]) == false)
-	{
 		return (0);
-	}
 	while (ph_isdigit(nptr[i]))
 	{
 		if (overflow(mns_flag, res, nptr[i]) == 0)

@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:28:39 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/14 03:12:20 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/14 22:55:56 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ typedef struct s_table_status
 	bool			is_running;
 }	t_table_status;
 
-typedef struct s_philo_alive
+typedef struct s_philo_state
 {
 	pthread_mutex_t	mutex;
-	bool			value;
-}	t_philo_alive;
+	int				value;
+}	t_philo_state;
 
 typedef struct s_philo_eat_count
 {

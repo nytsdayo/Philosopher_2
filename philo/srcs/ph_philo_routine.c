@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo_routine.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 08:45:19 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Updated: 2025/08/15 01:27:47 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ void	*ph_philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	philo_info = philo->philo_info;
-	ret = 0;
 	pthread_mutex_lock(&philo->table_info->start_time->mutex);
 	pthread_mutex_unlock(&philo->table_info->start_time->mutex);
 	if (philo_info->id % 2 == 0)
-		ph_usleep(10);
+		ph_ms_sleep(10);
 	while (true)
 	{
 		if (ph_philo_is_full(philo->philo_info))
@@ -54,7 +53,9 @@ void	*ph_philo_routine(void *arg)
 		if (ret != PHILO_ALIVE)
 			break ;
 	}
-	(void)ret;
+	pthread_mutex_lock(&philo->philo_info->state.mutex);
+	philo->philo_info->state.value = ret;
+	pthread_mutex_unlock(&philo->philo_info->state.mutex);
 	return (NULL);
 }
 

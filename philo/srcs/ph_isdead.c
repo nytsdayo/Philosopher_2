@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 00:00:00 by jules             #+#    #+#             */
-/*   Updated: 2025/08/14 03:52:24 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/14 23:05:09 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ bool	ph_isdead(t_philo *philo)
 	if (current_time - last_eat_time
 		> philo->philo_info->philo_data.time_to_die)
 	{
-		pthread_mutex_lock(&philo->philo_info->is_alive.mutex);
-		philo->philo_info->is_alive.value = false;
-		pthread_mutex_unlock(&philo->philo_info->is_alive.mutex);
+		pthread_mutex_lock(&philo->philo_info->state.mutex);
+		philo->philo_info->state.value = false;
+		pthread_mutex_unlock(&philo->philo_info->state.mutex);
 		return (true);
 	}
 	return (false);

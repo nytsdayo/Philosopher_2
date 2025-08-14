@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 09:44:53 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/14 03:30:05 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/14 22:55:16 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_philo_info
 	t_print			*print_mutex;
 	t_philo_data	philo_data;
 	t_philo_eat_count				eat_count;
-	t_philo_alive	is_alive;
+	t_philo_state	state;
 }	t_philo_info;
 
 typedef struct s_table_info

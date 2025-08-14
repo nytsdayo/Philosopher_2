@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 03:01:43 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/14 01:55:00 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/15 01:15:14 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef enum e_arg_status
 	PH_INVAlID_ARGC,
 	PH_INVALID_NOT_NUM,
 	PH_INVALID_OUT_OF_RANGE,
+	PH_ERROR,
 	PH_MEMORY_ERROR,
 	PH_MUTEX_ERROR,
 	PH_THREAD_ERROR,
