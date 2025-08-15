@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_isdigit.c                                       :+:      :+:    :+:   */
+/*   ph_wait_start.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 00:59:23 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Created: 2025/08/15 00:19:46 by rnakatan          #+#    #+#             */
+/*   Updated: 2025/08/15 00:19:46 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include "ph_mutex.h"
 
-/*
-** Checks if a character is a decimal digit ('0' through '9').
-*/
-bool	ph_isdigit(char c)
+void	ph_wait_start(t_start_time *start_time)
 {
-	return ('0' <= c && c <= '9');
+	pthread_mutex_lock(&start_time->mutex);
+	pthread_mutex_unlock(&start_time->mutex);
 }

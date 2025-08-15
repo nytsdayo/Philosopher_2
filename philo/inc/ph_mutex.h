@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_mutex.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyts <nyts@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:28:39 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/08 14:40:08 by nyts             ###   ########.fr       */
+/*   Updated: 2025/08/14 22:55:56 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PH_MUTEX_H
 
 # include <pthread.h>
+# include <stdbool.h>
 
 typedef struct s_start_time
 {
@@ -27,11 +28,17 @@ typedef struct s_table_status
 	bool			is_running;
 }	t_table_status;
 
-typedef struct s_philo_alive
+typedef struct s_philo_state
 {
 	pthread_mutex_t	mutex;
-	bool			value;
-}	t_philo_alive;
+	int				value;
+}	t_philo_state;
+
+typedef struct s_philo_eat_count
+{
+	pthread_mutex_t	mutex;
+	int				value;
+}	t_philo_eat_count;
 
 typedef struct s_fork
 {

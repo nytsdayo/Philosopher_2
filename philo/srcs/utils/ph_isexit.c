@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_isdigit.c                                       :+:      :+:    :+:   */
+/*   ph_isexit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 00:59:23 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 00:00:00 by jules            ###   ########.fr       */
+/*   Created: 2025/08/14 22:54:15 by rnakatan          #+#    #+#             */
+/*   Updated: 2025/08/14 22:57:56 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ph_dining.h"
 #include <stdbool.h>
 
-/*
-** Checks if a character is a decimal digit ('0' through '9').
-*/
-bool	ph_isdigit(char c)
+bool	ph_isexit(t_philo *philo)
 {
-	return ('0' <= c && c <= '9');
+	bool	is_running;
+
+	pthread_mutex_lock(&philo->table_info->status.mutex);
+	is_running = philo->table_info->status.is_running;
+	pthread_mutex_unlock(&philo->table_info->status.mutex);
+	return (!is_running);
 }

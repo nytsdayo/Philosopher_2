@@ -6,19 +6,23 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 20:01:45 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/13 20:01:45 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/16 04:38:34 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_dining.h"
 #include "ph_status.h"
-#include "ph_action.h"
-#include <unistd.h>
-#include <stdbool.h>
 #include "ph_utils.h"
+#include <pthread.h>
+#include <stdbool.h>
+#include <unistd.h>
 
-static bool	ph_isexit(t_philo *philo);
-
+/*
+** A custom usleep function that sleeps for a specified duration ('time')
+** while periodically checking if the philosopher has died or if the
+** simulation has ended. This makes actions like eating and sleeping
+** interruptible.
+*/
 int	ph_act_usleep(t_philo *philo, long time)
 {
 	long	start_time;
@@ -29,21 +33,15 @@ int	ph_act_usleep(t_philo *philo, long time)
 	while (current_time - start_time < time)
 	{
 		if (ph_isdead(philo))
+		{
 			return (PHILO_DEAD);
+		}
 		if (ph_isexit(philo))
+		{
 			return (PHILO_EXIT);
+		}
 		usleep(100);
 		current_time = ph_get_now_time_msec();
 	}
 	return (PHILO_ALIVE);
-}
-
-static bool	ph_isexit(t_philo *philo)
-{
-	bool is_running;
-	
-	pthread_mutex_lock(&philo->table_info->status.mutex);
-	is_running = philo->table_info->status.is_running;
-	pthread_mutex_unlock(&philo->table_info->status.mutex);
-	return (is_running == false);
 }
