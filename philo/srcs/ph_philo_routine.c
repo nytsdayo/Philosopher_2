@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 08:45:19 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/15 01:27:47 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/16 04:17:30 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	*ph_philo_routine(void *arg)
 	philo_info = philo->philo_info;
 	pthread_mutex_lock(&philo->table_info->start_time->mutex);
 	pthread_mutex_unlock(&philo->table_info->start_time->mutex);
-	if (philo_info->id % 2 == 0)
-		ph_ms_sleep(10);
 	while (true)
 	{
+		if (philo_info->id % 2 == 0)
+			usleep(10);
 		if (ph_philo_is_full(philo->philo_info))
 		{
 			ret = PHILO_FULL;
