@@ -6,7 +6,7 @@
 /*   By: rnakatan <rnakatan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 08:45:19 by rnakatan          #+#    #+#             */
-/*   Updated: 2025/08/16 04:17:30 by rnakatan         ###   ########.fr       */
+/*   Updated: 2025/08/16 04:54:28 by rnakatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*ph_philo_routine(void *arg)
 	while (true)
 	{
 		if (philo_info->id % 2 == 0)
-			usleep(10);
+			usleep(1000);
 		if (ph_philo_is_full(philo->philo_info))
 		{
 			ret = PHILO_FULL;
