@@ -45,7 +45,5 @@ fclean: clean
 
 re: fclean all
 
-test:
-	@cd ../ && bash ./test_args.sh
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
